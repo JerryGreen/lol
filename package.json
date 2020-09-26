@@ -1,0 +1,14 @@
+{
+  "name": "lol",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "deno test --unstable --allow-read --allow-write check_test.ts check_init_test.ts",
+    "lint": "deno run --unstable --allow-read check_init.ts"
+  },
+  "author": "JerryGreen",
+  "license": "ISC",
+  "devDependencies": {
+    "husky": "4.3.0"
+  }
+}
