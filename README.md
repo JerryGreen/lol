@@ -1,4 +1,4 @@
-# List of JerryGreen's favorite games
+# List of JerryGreen's favorite League of Legends games
 
 - `games_info` has some technical info about my games I favored (mainly for websites and apps)
 - `replays` has game replays associated with those data (so anyone can download it)
