@@ -9,5 +9,11 @@
   },
   "[typescriptreact]": {
     "editor.defaultFormatter": "denoland.vscode-deno"
-  }
+  },
+  "json.schemas": [
+    {
+      "fileMatch": ["/games_info/*.json"],
+      "url": "./games_info_schema.json"
+    }
+  ]
 }

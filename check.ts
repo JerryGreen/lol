@@ -10,6 +10,7 @@ export const perfectTestGameInfo = {
   "me": "Tryndamere",
   "vs": "Maokai",
   "lane": "top",
+  "rank": "Gold IV",
   "replay_file": "replays_test/TEST-1.rofl",
   "details":
     "https://matchhistory.ru.leagueoflegends.com/ru/#match-details/RU/292500952/202436939?tab=overview",

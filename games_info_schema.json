@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "date": {
+      "type": "string"
+    },
+    "patch": {
+      "type": "string"
+    },
+    "me": {
+      "type": "string"
+    },
+    "vs": {
+      "type": "string"
+    },
+    "lane": {
+      "type": "string"
+    },
+    "rank": {
+      "type": "string"
+    },
+    "replay_file": {
+      "type": "string"
+    },
+    "details": {
+      "type": "string"
+    },
+    "full_video": {
+      "type": "string"
+    },
+    "promo_video": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "date",
+    "patch",
+    "me",
+    "vs",
+    "lane",
+    "rank",
+    "replay_file",
+    "details",
+    "full_video",
+    "promo_video"
+  ]
+}
