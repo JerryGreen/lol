@@ -1,7 +1,9 @@
 import { walk, readJson, exists } from "https://deno.land/std@0.68.0/fs/mod.ts";
 // import difference from "https://deno.land/x/ramda@v0.27.1/difference.js";
 // import * as R from "https://deno.land/x/ramda@v0.27.1/index.js";
-import * as R from "https://x.nest.land/ramda@0.27.0/source/index.js";
+import * as Ramda from "https://x.nest.land/ramda@0.27.0/source/index.js";
+
+const R = Ramda as any;
 
 export const perfectTestGameInfo = {
   "id": "292500952",
@@ -120,49 +122,11 @@ export default async function init(path = "games_info") {
   for await (const entry of walk(path, { exts: ["json"] })) {
     const gameInfoInitial = (await readJson(entry.path)) as GameInfo;
 
-    // const gameInfoProcessed: ProcessedGameInfo = await checkMissingRequiredKeys(
-    //   gameInfoInitial,
-    // ).then((i) =>
-    //   checkUnsupportedKeys(i).then((i) => checkReplayFileExists(i))
-    // );
-
-    // const gameInfoProcessed: ProcessedGameInfo = await (R.pipe as any)(
-    //   checkMissingRequiredKeys,
-    //   checkUnsupportedKeys,
-    //   checkReplayFileExists,
-    // )(gameInfoInitial);
-
-    // const gameInfoProcessed: ProcessedGameInfo = R.mergeAll(
-    //   (await Promise.all(
-    //     [
-    //       checkMissingRequiredKeys(gameInfoInitial),
-    //       checkUnsupportedKeys(gameInfoInitial),
-    //       checkReplayFileExists(gameInfoInitial),
-    //     ],
-    //   )),
-    // );
-
-    // const rules = (k, l, r) => k == "values" ? R.concat(l, r) : r;
-    const rules = (k: string, l: any, r: any) => {
-      switch (k) {
-        case "replayFileExists":
-          return l || r;
-        default:
-          return R.mergeLeft(l, r);
-      }
-    };
-
-    const gameInfoProcessed: ProcessedGameInfo = R.reduce(
-      (R.mergeDeepWithKey as any)(rules),
-      gameInfoInitial,
-      (await Promise.all(
-        [
-          checkMissingRequiredKeys(gameInfoInitial),
-          checkUnsupportedKeys(gameInfoInitial),
-          checkReplayFileExists(gameInfoInitial),
-        ],
-      )),
-    );
+    const gameInfoProcessed: ProcessedGameInfo = await R.pipeWith(R.andThen)([
+      checkMissingRequiredKeys,
+      checkUnsupportedKeys,
+      checkReplayFileExists,
+    ])(gameInfoInitial);
 
     if (!R.whereEq(noErrors, gameInfoProcessed.errors)) {
       console.group("❌", entry.path, "... errors:");
